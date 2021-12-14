@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1 @click="greet">打开文件</h1>
-    <p>{{projects}}</p>
+    <p>{{ projects }}</p>
   </div>
 </template>
 
@@ -20,6 +20,9 @@ export default {
     }
   },
   mounted() {
+    ipcRenderer.on(Channel.PROJECT_CHANNEL, (event, projects) => {
+      this.projects = projects
+    })
     ipcRenderer.invoke(Channel.GET_PROJECT_LIST).then((projects) => {
       this.projects = projects
     })
@@ -27,7 +30,7 @@ export default {
   methods: {
     greet() {
       ipcRenderer.send(Channel.OPEN_PROJECT, {
-        type: "AndroidStudio",
+        type: "VSCode",
         path: "/Users/bytedance/workspace/Android/MyApplication"
       });
     },

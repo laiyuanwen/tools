@@ -26,6 +26,7 @@ export function onWindowCreate(win) {
     // TODO 解除监听
     app.store.onDidChange(StoreKey.PROJECT_LIST, ((newValue, oldValue) => {
         app.console.log("监听到projectList改变")
+        app.console.log(JSON.stringify(newValue))
         win.webContents.send(Channel.PROJECT_CHANNEL, newValue)
     }))
 }

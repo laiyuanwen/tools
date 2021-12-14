@@ -21,8 +21,7 @@ export function updateProjectOnOpen(type, path) {
         projects.push({openType: type, openTime: new Date().getTime(), path})
     }
 
-    _.orderBy(projects, ['openTime'], ['desc'])
-    store.set(StoreKey.PROJECT_LIST, projects)
+    store.set(StoreKey.PROJECT_LIST,  _.orderBy(projects, ['openTime'], ['desc']))
 }
 
 export function getProjectList() {
