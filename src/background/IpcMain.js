@@ -1,7 +1,7 @@
 import {app, ipcMain} from 'electron'
 import {openProject} from "./utils/IDEUtils";
 import {Channel, StoreKey} from "../Constant";
-import {getProjectList, updateProjectOnOpen} from "./utils/Store";
+import {addProject, deleteProject, getProjectList, updateProjectOnOpen} from "./utils/Store";
 
 /**
  * 打开项目
@@ -10,6 +10,22 @@ ipcMain.on(Channel.OPEN_PROJECT, (_, {type, path}) => {
     console.log(`打开项目：${type} ${path}`)
     updateProjectOnOpen(type, path)
     openProject(type, path)
+})
+
+/**
+ * 添加项目
+ */
+ipcMain.on(Channel.ADD_PROJECT, (_, {name, desc, path, openType}) => {
+    console.log(`添加项目：${name}, ${desc}, ${path}, ${openType}`)
+    addProject(name, desc, path, openType)
+})
+
+/**
+ * 删除项目
+ */
+ipcMain.on(Channel.DELETE_PROJECT, (_, {path}) => {
+    console.log(`删除项目：${path}`)
+    deleteProject(path)
 })
 
 /**
@@ -25,7 +41,7 @@ export function onWindowCreate(win) {
         console.log(JSON.stringify(newValue))
         win.webContents.send(Channel.PROJECT_CHANNEL, newValue)
     }))
-    win.on('close',()=>{
+    win.on('close', () => {
         unsubscribe()
     })
 }

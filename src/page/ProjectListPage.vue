@@ -1,13 +1,16 @@
 <template>
   <div class="hello">
+    <AddProject/>
     <open-file/>
   </div>
 </template>
 
 <script>
-import OpenFile from './OpenFile.vue'
+import OpenFile from '../components/OpenFile.vue'
+import AddProject from "./AddProject.vue";
+
 export default {
-  components: { OpenFile },
+  components: {AddProject, OpenFile},
   name: 'HelloWorld',
   props: {
     msg: String
@@ -20,14 +23,17 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
   margin: 0 10px;
 }
+
 a {
   color: #42b983;
 }

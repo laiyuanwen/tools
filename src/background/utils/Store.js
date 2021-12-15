@@ -1,4 +1,4 @@
-import {app} from 'electron'
+import {app, dialog} from 'electron'
 import Store from 'electron-store'
 import _ from 'lodash'
 import {StoreKey} from "../../Constant";
@@ -21,13 +21,36 @@ export function updateProjectOnOpen(type, path) {
         projects.push({openType: type, openTime: new Date().getTime(), path})
     }
 
-    store.set(StoreKey.PROJECT_LIST,  _.orderBy(projects, ['openTime'], ['desc']))
+    store.set(StoreKey.PROJECT_LIST, _.orderBy(projects, ['openTime'], ['desc']))
 }
 
 export function getProjectList() {
     return store.get(StoreKey.PROJECT_LIST)
 }
 
-export function addProject() {
+export function addProject(name, desc, path, openType) {
+    const projects = store.get(StoreKey.PROJECT_LIST) || []
 
+    const currentProject = _.find(projects, {path})
+
+    if (currentProject) {
+        dialog.showErrorBox('项目已存在', `路径已添加：${path}`)
+        return
+    }
+
+    projects.push({
+        name,
+        desc,
+        openType,
+        path,
+        openTime: new Date().getTime(),
+    })
+
+    store.set(StoreKey.PROJECT_LIST, _.orderBy(projects, ['openTime'], ['desc']))
+}
+
+export function deleteProject(path) {
+    const projects = store.get(StoreKey.PROJECT_LIST) || []
+    _.remove(projects, {path});
+    store.set(StoreKey.PROJECT_LIST, projects)
 }
