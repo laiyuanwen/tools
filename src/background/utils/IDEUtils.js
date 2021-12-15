@@ -1,6 +1,9 @@
 import {exec} from 'child_process'
+const log = require('electron-log');
 
 export function openProject(type, path) {
+    const file =  log.transports.file.getFile();
+    log.info(file)
     if (type === "AndroidStudio") {
         openInAndroidStudio(path)
     } else if (type === "IDEA") {
@@ -24,7 +27,11 @@ function openInIntelliJIDEA(path) {
 }
 
 function openInVSCode(path) {
-    exec(`code ${path}`);
+    exec(`code ${path}`,{env: { PATH: `/usr/local/bin:${process.env['PATH']}` }},(error, stdout, stderr) => {
+        log.info("openInVSCode " + error)
+        log.info("openInVSCode " + stdout)
+        log.info("openInVSCode " + stderr)
+    });
 }
 
 function openInFinder(path) {
