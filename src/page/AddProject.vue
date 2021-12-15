@@ -29,7 +29,7 @@ export default defineComponent({
   setup() {
     return {
       Tools,
-      outerVisible: ref(true),
+      outerVisible: ref(false),
       name: ref(''),
       desc: ref(''),
       path: ref(''),

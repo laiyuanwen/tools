@@ -10,6 +10,9 @@ import log from 'electron-log'
 Object.assign(console, log.functions);
 
 Store.initRenderer()
+console.log(
+    app.getPath('userData')
+)
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
