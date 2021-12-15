@@ -4,7 +4,7 @@ import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import "./background/IpcMain"
 const isDevelopment = process.env.NODE_ENV !== 'production'
 import Store from "electron-store";
-import {onWindowCreate} from "./background/IpcMain";
+import {onWindowCreate} from "@/background/IpcMain";
 
 import log from 'electron-log'
 Object.assign(console, log.functions);
@@ -28,6 +28,7 @@ async function createWindow() {
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
+      // @ts-ignore
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
     }

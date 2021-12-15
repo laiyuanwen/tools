@@ -30,10 +30,6 @@ export default {
   },
   methods: {
     greet() {
-      ipcRenderer.send(Channel.OPEN_PROJECT, {
-        type: "VSCode",
-        path: "/Users/bytedance/workspace/Android/MyApplication"
-      });
     },
   },
 };

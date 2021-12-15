@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import OpenFile from '../components/OpenFile.vue'
 import AddProject from "./AddProject.vue";
 

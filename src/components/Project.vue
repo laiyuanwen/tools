@@ -48,7 +48,7 @@ export default {
     },
     openProject() {
       ipcRenderer.send(Channel.OPEN_PROJECT, {
-        type: "VSCode",
+        type: this.project.openType,
         path: this.project.path
       });
     },
