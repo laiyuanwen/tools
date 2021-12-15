@@ -4,8 +4,10 @@ import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import "./background/IpcMain"
 const isDevelopment = process.env.NODE_ENV !== 'production'
 import Store from "electron-store";
-import {Channel, StoreKey} from "./Constant";
 import {onWindowCreate} from "./background/IpcMain";
+
+import log from 'electron-log'
+Object.assign(console, log.functions);
 
 Store.initRenderer()
 

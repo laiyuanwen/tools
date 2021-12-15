@@ -1,16 +1,17 @@
 <template>
   <div class="hello">
-    <h1 @click="greet">打开文件</h1>
-    <p>{{ projects }}</p>
+    <Project v-for="(project, index) in projects" :key="index" :project="project"/>
   </div>
 </template>
 
 <script>
 import {ipcRenderer} from "electron";
 import {Channel} from "../Constant";
+import Project from "./Project";
 
 export default {
   name: "HelloWorld",
+  components: {Project},
   props: {
     msg: String,
   },
