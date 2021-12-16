@@ -2,6 +2,7 @@
   <div @click="openProject"
        :style="{ display:'flex', padding: '8px',background: '#42b983',marginTop: '20px'}">
     <img :src="this.icon" width="32" height="32" :style="{marginRight:'10px'}"/>
+    <div>{{ this.count }}</div>
 
     <div :style="{display:'flex',flexDirection:'column',flexGrow:1,alignItems:'flex-start'}">
       <div :style="{ color: 'red', fontSize:  '16px' }">{{ project.name || "项目名称" }}</div>
@@ -27,6 +28,9 @@ export default {
     project: Object,
   },
   computed: {
+    count () {
+      return this.$store.state.count
+    },
     icon: function () {
       return this.project.icon || require("../assets/icon_default_project.png")
     },

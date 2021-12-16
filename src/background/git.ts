@@ -1,11 +1,11 @@
-// import {ipcMain} from "electron";
-// import {Channel} from "../Constant";
-// import {getProjectList} from "./utils/Store";
-//
-// ipcMain.handle(Channel.GET_PROJECT_LIST, () => {
-//     return getProjectList()
-// })
+const git = require('simple-git')
 
-export function showName(a: String) {
-    console.log(a)
+/**
+ * 获取当前分支
+ *
+ * @param path
+ */
+export async function currentBranch(path: String) {
+    const branches = await git(path).branchLocal()
+    return branches.current
 }
