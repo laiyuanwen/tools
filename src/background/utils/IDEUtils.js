@@ -1,9 +1,6 @@
 import {exec} from 'child_process'
-const log = require('electron-log');
 
 export function openProject(type, path) {
-    const file =  log.transports.file.getFile();
-    log.info(file)
     if (type === "AndroidStudio") {
         openInAndroidStudio(path)
     } else if (type === "IDEA") {
@@ -18,26 +15,29 @@ export function openProject(type, path) {
 }
 
 
+const options = {env: {PATH: `/usr/local/bin:${process.env['PATH']}`}}
+const callback = (error, stdout, stderr) => {
+    console.log(error)
+    console.log(stdout)
+    console.log(stderr)
+}
+
 function openInAndroidStudio(path) {
-    exec(`studio ${path}`);
+    exec(`studio ${path}`, options, callback);
 }
 
 function openInIntelliJIDEA(path) {
-    exec(`idea ${path}`);
+    exec(`idea ${path}`, options, callback);
 }
 
 function openInVSCode(path) {
-    exec(`code ${path}`,{env: { PATH: `/usr/local/bin:${process.env['PATH']}` }},(error, stdout, stderr) => {
-        log.info("openInVSCode " + error)
-        log.info("openInVSCode " + stdout)
-        log.info("openInVSCode " + stderr)
-    });
+    exec(`code ${path}`, options, callback);
 }
 
 function openInFinder(path) {
-    exec(`open ${path}`);
+    exec(`open ${path}`, options, callback);
 }
 
 function openInTerminal(path) {
-    exec(`open -a iTerm ${path}`);
+    exec(`open -a iTerm ${path}`, options, callback);
 }

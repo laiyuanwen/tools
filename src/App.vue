@@ -25,6 +25,11 @@ export default {
   name: 'App',
   components: {
     ProjectListPage
+  },
+  mounted() {
+    window.onfocus = ()=>{
+      console.log("刷新git状态")
+    }
   }
 }
 </script>
