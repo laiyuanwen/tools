@@ -6,14 +6,8 @@ export const Channel = {
     GET_PROJECT_LIST: "GET_PROJECT_LIST"
 }
 
-export const StoreKey = {
-    PROJECT_LIST: "PROJECT_LIST"
-}
-
-export const Project = {
-    openType: "最后一个打开的类型",
-    openTime: "最后一次打开的时间",
-    path: "项目路径"
+export enum StoreKey {
+    PROJECT_LIST = "PROJECT_LIST"
 }
 
 export const Tools = {
@@ -22,4 +16,14 @@ export const Tools = {
     VSCode: "VSCode",
     Finder: "Finder",
     Terminal: "Terminal"
+}
+
+export interface Project {
+    name: string // 项目名字
+    desc: string // 项目描述
+    icon: string // 图标
+    branch: string // 当前分支
+    openType: string  // 最后一个打开的类型
+    openTime: string //  最后一次打开的时间
+    path: string // 项目路径
 }

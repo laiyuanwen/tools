@@ -6,7 +6,7 @@
 
 <script>
 import {ipcRenderer} from "electron";
-import {Channel} from "../Constant";
+import {Channel} from "@/Constant";
 import Project from "./Project";
 
 export default {
@@ -28,9 +28,6 @@ export default {
       this.projects = projects
     })
   },
-  methods: {
-    greet() {
-    },
-  },
+  methods: {},
 };
 </script>

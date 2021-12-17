@@ -6,7 +6,7 @@
 import ProjectListPage from './page/ProjectListPage.vue'
 import { StoreKey } from "./Constant";
 import Store from "electron-store";
-import { currentBranch } from "./background/git";
+import { currentBranch } from "./background/utils/git";
 
 // const {execSync} = require('child_process')
 // const branch = execSync('git symbolic-ref --short HEAD')
@@ -27,9 +27,7 @@ export default {
     ProjectListPage
   },
   mounted() {
-    window.onfocus = () => {
-      this.$store.dispatch('onfocus')
-    }
+    window.onfocus = () => this.$store.dispatch('onfocus')
   }
 }
 </script>

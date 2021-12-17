@@ -1,35 +1,52 @@
 import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
+const windowStateKeeper = require('electron-window-state');
 import "./background/IpcMain"
+
+import "./background/utils/git"
 const isDevelopment = process.env.NODE_ENV !== 'production'
 import Store from "electron-store";
 import {onWindowCreate} from "@/background/IpcMain";
 
 import log from 'electron-log'
+import { exec,spawn } from "child_process";
+import { record } from "@/background/utils";
 Object.assign(console, log.functions);
 
 Store.initRenderer()
-console.log(
-    app.getPath('userData')
-)
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
+console.log(process.versions.electron)
+record(()=>{
+  spawn('ls', ['.']);
+  // exec('ls')
+})
+
 async function createWindow() {
+  const mainWindowState = windowStateKeeper({
+    defaultWidth: 1000,
+    defaultHeight: 800
+  });
+
+
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 1200,
-    height: 750,
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
     webPreferences: {
 
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       // @ts-ignore
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      nodeIntegrationInWorker:true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION
     }
   })
@@ -43,6 +60,14 @@ async function createWindow() {
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
+
+  win.webContents.once('dom-ready', () => {
+    mainWindowState.manage(win);
+  })
+  exec('git symbolic-ref --short HEAD')
+
+
+
 
   onWindowCreate(win)
 }

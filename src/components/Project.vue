@@ -2,7 +2,7 @@
   <div @click="openProject"
        :style="{ display:'flex', padding: '8px',background: '#42b983',marginTop: '20px'}">
     <img :src="this.icon" width="32" height="32" :style="{marginRight:'10px'}"/>
-    <div>{{ this.count }}</div>
+    <div>{{ this.branch }}</div>
 
     <div :style="{display:'flex',flexDirection:'column',flexGrow:1,alignItems:'flex-start'}">
       <div :style="{ color: 'red', fontSize:  '16px' }">{{ project.name || "项目名称" }}</div>
@@ -20,6 +20,7 @@ import dayjs from "dayjs";
 import {ipcRenderer} from "electron";
 import {Channel} from "../Constant";
 import IDESelect from "./IDESelect";
+import {currentBranch} from "@/background/utils/git";
 
 export default {
   name: "Project",
@@ -28,9 +29,6 @@ export default {
     project: Object,
   },
   computed: {
-    count () {
-      return this.$store.state.count
-    },
     icon: function () {
       return this.project.icon || require("../assets/icon_default_project.png")
     },
@@ -39,9 +37,19 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      branch: ""
+    }
   },
   mounted() {
+    currentBranch(this.project.path).then((b) => {
+      this.branch = b
+    })
+    window.addEventListener('focus', () => {
+      currentBranch(this.project.path).then((b) => {
+        this.branch = b
+      })
+    });
   },
   methods: {
     selectIDE(type) {

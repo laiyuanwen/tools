@@ -1,5 +1,5 @@
 import {app, ipcMain} from 'electron'
-import {openProject} from "./utils/IDEUtils";
+import {openProject} from "./utils";
 import {Channel, StoreKey} from "../Constant";
 import {addProject, deleteProject, getProjectList, updateProjectOnOpen} from "./utils/Store";
 
