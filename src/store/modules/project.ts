@@ -16,53 +16,53 @@ const state = () => {
 
 // getters
 const getters = {
-    cartProducts: (state, getters, rootState) => {
-        console.log()
-    },
-
-    cartTotalPrice: (state, getters) => {
-        console.log()
-    }
+    // cartProducts: (state, getters, rootState) => {
+    //     console.log()
+    // },
+    //
+    // cartTotalPrice: (state, getters) => {
+    //     console.log()
+    // }
 }
 
 // actions
 const actions = {
-    async checkout({ commit, state }, products) {
-        console.log()
-    },
-
-    addProductToCart({ state, commit }, product) {
-        console.log()
-    },
+    // async checkout({ commit, state }, products) {
+    //     console.log()
+    // },
+    //
+    // addProductToCart({ state, commit }, product) {
+    //     console.log()
+    // },
 
     syncCodeDir({ state, commit }) {
-        record(()=>{
-            const dirs = fs.readdirSync(`${HOME}/code`)
-            for (const dir of dirs) {
-                console.log("文件夹:" + dir)
-            }
-        })
+        // record(()=>{
+        //     const dirs = fs.readdirSync(`${HOME}/code`)
+        //     for (const dir of dirs) {
+        //         console.log("文件夹:" + dir)
+        //     }
+        // })
     }
 }
 
 
 // mutations
 const mutations = {
-    pushProductToCart(state, { id }) {
-        console.log()
-    },
-
-    incrementItemQuantity(state, { id }) {
-        console.log()
-    },
-
-    setCartItems(state, { items }) {
-        console.log()
-    },
-
-    setCheckoutStatus(state, status) {
-        console.log()
-    }
+    // pushProductToCart(state, { id }) {
+    //     console.log()
+    // },
+    //
+    // incrementItemQuantity(state, { id }) {
+    //     console.log()
+    // },
+    //
+    // setCartItems(state, { items }) {
+    //     console.log()
+    // },
+    //
+    // setCheckoutStatus(state, status) {
+    //     console.log()
+    // }
 }
 
 export default {

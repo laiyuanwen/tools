@@ -18,7 +18,7 @@ export const Tools = {
     Terminal: "Terminal"
 }
 
-export interface Git {
+export interface Repo {
     name: string // 仓库名称
     ssh: string // git地址
     home: string // 仓库地址

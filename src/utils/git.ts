@@ -23,3 +23,7 @@ export async function clone(ssh: string, path: string = WORKSPACE): Promise<any>
         console.error(`clone 失败` + e)
     }
 }
+
+export async function getGitUrl(path: string) {
+    return git(path).listRemote(['--get-url']).then(url => url.trim())
+}

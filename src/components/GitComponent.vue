@@ -1,14 +1,14 @@
 <template>
   <div @click="click" class="box">
     <div style="flex-grow: 1">
-      <p class="name"> {{ this.git.name }}({{ this.git.type }}) </p>
-      <p class="git-address"> {{ this.git.ssh }} </p>
+      <p class="name"> {{ this.repo.name }}({{ this.repo.type }}) </p>
+      <p class="git-address"> {{ this.repo.ssh }} </p>
     </div>
     <div>
       <el-button
-          :style="[{color: git.inWorkspace ? '#67C23A':'#F56C6C'},this.git.inWorkspace && {pointerEvents: 'none'}]"
-          :disabled="git.inWorkspace"
-          :loading="cloning"
+          :style="[{color: repo.inWorkspace ? '#67C23A':'#F56C6C'},this.repo.inWorkspace && {pointerEvents: 'none'}]"
+          :disabled="repo.inWorkspace"
+          :loading="this.isCloning"
           @click.stop="clone"
           type="text">
         {{ status }}
@@ -18,35 +18,37 @@
 </template>
 
 <script lang="ts">
-import { Git } from "@/Constant";
-import { clone, currentBranch } from "@/utils";
+import { Repo } from "@/Constant";
+import { clone } from "@/utils";
 
 export default {
   name: "GitComponent",
   props: {
     // @ts-ignore
-    git: Git
+    repo: Repo
   },
   computed: {
+    isCloning(){
+      return this.$store.getters['repo/isCloning'](this.repo.ssh)
+    },
     status() {
-      if (this.git.inWorkspace) return "已存在"
-      else if (this.cloning) return "Cloning"
+      if (this.repo.inWorkspace) return "已存在"
+      else if (this.isCloning) return "Cloning"
       else return "不存在"
     }
   },
   data() {
-    return {
-      cloning: false
-    }
+    return {}
   },
   methods: {
     async clone() {
-      this.cloning = true
-      await clone(this.git.ssh)
-      this.cloning = false
+      this.$store.dispatch(`repo/clone`, this.repo.ssh)
+      // this.cloning = true
+      // await clone(this.git.ssh)
+      // this.cloning = false
     },
     click() {
-      console.log(this.git)
+      // this.cloning = false
     }
   }
 }

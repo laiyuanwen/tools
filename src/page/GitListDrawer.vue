@@ -3,12 +3,13 @@
     Git列表
   </el-button>
   <el-drawer
+      @open="onOpenDrawer"
       v-model="drawer"
       size="40%"
       title="Git列表">
     <div class="drawer-container">
       <el-space direction="vertical" alignment="stretch" class="git-list">
-        <GitComponent v-for="(git,index) in gitList" :key="git.ssh" :git="git"/>
+        <GitComponent v-for="(git,index) in repos" :key="git.ssh" :repo="git"/>
       </el-space>
       <el-button style="border-radius: 0" :round="false" type="primary">添加</el-button>
     </div>
@@ -16,34 +17,30 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import GitComponent from "../components/GitComponent.vue";
-import { Git } from "@/Constant";
+import { useStore } from 'vuex'
 
 export default defineComponent({
   components: { GitComponent },
   setup() {
-    const drawer = ref(true)
     return {
-      gitList: [
-        {
-          name: '仓库',
-          home: "https://www.baidu.com/",
-          ssh: "git@github.com:electron/electron-quick-start.git",
-          type: "github",
-          inWorkspace: false
-        },
-        {
-          name: '仓库',
-          home: "https://www.baidu.com/",
-          ssh: "git@github.com:desktop/desktop.git",
-          type: "github",
-          inWorkspace: true
-        }
-      ] as Git[],
-      drawer,
+      drawer: ref(true)
     }
   },
+  mounted() {
+    this.$store.dispatch("repo/syncRepoList")
+  },
+  computed: {
+    repos: function () {
+      return this.$store.state.repo.repos
+    }
+  },
+  methods: {
+    onOpenDrawer() {
+      this.$store.dispatch("repo/syncRepoList")
+    }
+  }
 })
 </script>
 

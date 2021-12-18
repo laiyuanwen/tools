@@ -27,10 +27,7 @@ export const ProjectStore = {
      * 获取项目列表
      */
     getProjectList(): Project[] {
-        const newVar = store.get(StoreKey.PROJECT_LIST, []);
-        console.log(store)
-        console.log(newVar)
-        return newVar as Project[]
+        return store.get(StoreKey.PROJECT_LIST, []) as Project[]
     },
 
     /**

@@ -18,9 +18,9 @@ export function openProject(type, path) {
 const options = { env: { PATH: PATH } }
 const callback = (error, stdout, stderr) => {
     console.log(options)
-    console.log(error)
-    console.log(stdout)
-    console.log(stderr)
+    // console.log(error)
+    // console.log(stdout)
+    // console.log(stderr)
 }
 
 function openInAndroidStudio(path) {
