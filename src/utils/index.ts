@@ -3,14 +3,23 @@ export * from './ide'
 
 export function record(callback: any, name = "执行时间") {
     const time = new Date().getTime()
+    console.log(name + " start")
     callback()
-    console.log(`${name}：${new Date().getTime() - time}ms`)
+    console.log(name + " end")
+    console.log(`${ name }：${ new Date().getTime() - time }ms`)
 }
 
-export async function recordAsync(callback: any, name = "执行时间") {
+export async function recordAsync(name, callback: any) {
     const time = new Date().getTime()
-    await callback()
-    console.log(`${name}：${new Date().getTime() - time}ms`)
+    console.log(name + " start")
+    // eslint-disable-next-line no-useless-catch
+    try {
+        await callback()
+    } catch (e) {
+        throw e
+    }
+    console.log(name + " end")
+    console.log(`${ name }：${ new Date().getTime() - time }ms`)
 }
 
 async function sleep(time) {

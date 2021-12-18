@@ -16,3 +16,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-drawer__body {
+  --el-drawer-padding-primary: 0
+}
+</style>

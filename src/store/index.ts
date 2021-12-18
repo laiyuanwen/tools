@@ -32,7 +32,7 @@ export const store = createStore({
                     .then(branch => ({ ...project, branch })))
             }
 
-            await recordAsync(async () => {
+            await recordAsync('update project',async () => {
                 const list = await Promise.all(promise)
                 commit('update', list)
             })

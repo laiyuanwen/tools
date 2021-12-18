@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <AddProject/>
+    <GitListDrawer/>
     <open-file/>
   </div>
 </template>
@@ -8,9 +9,10 @@
 <script lang="ts">
 import OpenFile from '../components/OpenFile.vue'
 import AddProject from "./AddProject.vue";
+import GitListDrawer from "@/page/GitListDrawer.vue";
 
 export default {
-  components: {AddProject, OpenFile},
+  components: { GitListDrawer, AddProject, OpenFile },
   name: 'HelloWorld',
   props: {
     msg: String

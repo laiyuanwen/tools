@@ -18,6 +18,14 @@ export const Tools = {
     Terminal: "Terminal"
 }
 
+export interface Git {
+    name: string // 仓库名称
+    ssh: string // git地址
+    home: string // 仓库地址
+    type: string // 仓库类型（公司、Github）
+    inWorkspace: boolean // 是否在本地工作区间
+}
+
 export interface Project {
     name: string // 项目名字
     desc: string // 项目描述
@@ -26,6 +34,12 @@ export interface Project {
     openType: OpenType  // 最后一个打开的类型
     openTime?: string //  最后一次打开的时间
     path: string // 项目路径
+
+    // 未来会支持的字段
+    type?: string // 项目类型
+    commitUser?: string // 提交人检查
+    git?: string // Git地址
+    source?: string // 项目来源（公司、Github等）
 }
 
 export enum OpenType {
