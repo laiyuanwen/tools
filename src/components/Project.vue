@@ -1,10 +1,10 @@
 <template>
   <div @click="openProject"
-       :style="{ display:'flex', padding: '8px',background: '#42b983',marginTop: '20px'}">
+       class="project">
     <img :src="this.icon" width="32" height="32" :style="{marginRight:'10px'}"/>
-    <div>{{ this.branch }}</div>
 
     <div :style="{display:'flex',flexDirection:'column',flexGrow:1,alignItems:'flex-start'}">
+      <el-tag effect="dark" type="danger">{{ this.branch }}</el-tag>
       <div :style="{ color: 'red', fontSize:  '16px' }">{{ project.name || "项目名称" }}</div>
       <div>{{ project.path }}</div>
     </div>
@@ -74,4 +74,14 @@ export default {
 </script>
 
 <style scoped>
+.project {
+  display: flex;
+  padding: 8px;
+  background: #42b983;
+  margin-top: 20px
+}
+
+.project:hover {
+  background: #3ba877
+}
 </style>
