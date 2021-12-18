@@ -1,8 +1,8 @@
 import { createStore } from 'vuex'
 import { Project } from "@/Constant";
-import { getProjectList } from "@/background/utils/cache";
 import { currentBranch } from "@/background/utils/git";
 import { recordAsync } from "@/background/utils";
+import { ProjectStore } from "@/background/utils/cache/ProjectStore";
 
 interface State {
     projectList: Project[]
@@ -11,7 +11,7 @@ interface State {
 export const store = createStore({
     state(): State {
         return {
-            projectList: getProjectList()
+            projectList: ProjectStore.getProjectList()
         }
     },
     mutations: {

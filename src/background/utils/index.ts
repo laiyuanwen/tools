@@ -1,5 +1,4 @@
 export * from './git'
-export * from './cache'
 export * from './ide'
 
 export function record(callback: any, name = "执行时间") {

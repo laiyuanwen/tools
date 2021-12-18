@@ -1,4 +1,6 @@
-import {exec} from 'child_process'
+import { exec } from 'child_process'
+import { remote } from 'electron'
+import { PATH } from "@/background/utils/env";
 
 export function openProject(type, path) {
     if (type === "AndroidStudio") {
@@ -14,30 +16,30 @@ export function openProject(type, path) {
     }
 }
 
-
-const options = {env: {PATH: `/usr/local/bin:${process.env['PATH']}`}}
+const options = { env: { PATH: PATH } }
 const callback = (error, stdout, stderr) => {
+    console.log(options)
     console.log(error)
     console.log(stdout)
     console.log(stderr)
 }
 
 function openInAndroidStudio(path) {
-    exec(`studio ${path}`, options, callback);
+    exec(`studio ${ path }`, options, callback);
 }
 
 function openInIntelliJIDEA(path) {
-    exec(`idea ${path}`, options, callback);
+    exec(`idea ${ path }`, options, callback);
 }
 
 function openInVSCode(path) {
-    exec(`code ${path}`, options, callback);
+    exec(`code ${ path }`, options, callback);
 }
 
 function openInFinder(path) {
-    exec(`open ${path}`, options, callback);
+    exec(`open ${ path }`, options, callback);
 }
 
 function openInTerminal(path) {
-    exec(`open -a iTerm ${path}`, options, callback);
+    exec(`open -a iTerm ${ path }`, options, callback);
 }

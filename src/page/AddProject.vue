@@ -21,8 +21,9 @@
 <script>
 import {defineComponent, ref} from 'vue'
 import IDESelect from "../components/IDESelect";
-import {Channel, Tools} from "../Constant";
+import {Channel, OpenType, Tools} from "../Constant";
 import {ipcRenderer} from "electron";
+import {ProjectStore} from "@/background/utils/cache/ProjectStore";
 
 export default defineComponent({
   components: {IDESelect},
@@ -33,7 +34,7 @@ export default defineComponent({
       name: ref(''),
       desc: ref(''),
       path: ref(''),
-      openType: ref(''),
+      openType: ref(OpenType.VSCode) ,
     }
   },
   methods: {
@@ -46,12 +47,18 @@ export default defineComponent({
       // console.log(`path:${this.desc}`)
       // console.log(`path:${this.path}`)
       // console.log(`path:${this.openType}`)
-      ipcRenderer.send(Channel.ADD_PROJECT, {
+      ProjectStore.addProject({
         name: this.name,
         desc: this.desc,
         path: this.path,
         openType: this.openType
       })
+      // ipcRenderer.send(Channel.ADD_PROJECT, {
+      //   name: this.name,
+      //   desc: this.desc,
+      //   path: this.path,
+      //   openType: this.openType
+      // })
     }
   }
 })

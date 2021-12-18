@@ -21,6 +21,8 @@ import {ipcRenderer} from "electron";
 import {Channel} from "../Constant";
 import IDESelect from "./IDESelect";
 import {currentBranch} from "@/background/utils/git";
+import {ProjectStore} from "@/background/utils/cache/ProjectStore";
+import {openProject} from "@/background/utils";
 
 export default {
   name: "Project",
@@ -53,21 +55,15 @@ export default {
   },
   methods: {
     selectIDE(type) {
-      ipcRenderer.send(Channel.OPEN_PROJECT, {
-        type: type,
-        path: this.project.path
-      });
+      ProjectStore.updateProjectOnOpen(type, this.project.path)
+      openProject(type, this.project.path)
     },
     openProject() {
-      ipcRenderer.send(Channel.OPEN_PROJECT, {
-        type: this.project.openType,
-        path: this.project.path
-      });
+      ProjectStore.updateProjectOnOpen(this.project.openType, this.project.path)
+      openProject(this.project.openType, this.project.path)
     },
     deleteProject() {
-      ipcRenderer.send(Channel.DELETE_PROJECT, {
-        path: this.project.path
-      });
+      ProjectStore.deleteProject(this.project.path)
     }
   },
 };
