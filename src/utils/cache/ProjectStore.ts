@@ -1,7 +1,7 @@
 import Store from "electron-store";
 import { OpenType, Project } from "@/Constant";
 import _ from "lodash";
-import { HOME } from "@/background/utils/env";
+import { HOME } from "@/utils/env";
 
 const store = new Store({
     name: 'project',

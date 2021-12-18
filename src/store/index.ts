@@ -1,14 +1,18 @@
 import { createStore } from 'vuex'
 import { Project } from "@/Constant";
-import { currentBranch } from "@/background/utils/git";
-import { recordAsync } from "@/background/utils";
-import { ProjectStore } from "@/background/utils/cache/ProjectStore";
+import { currentBranch } from "@/utils/git";
+import { recordAsync } from "@/utils";
+import { ProjectStore } from "@/utils/cache/ProjectStore";
+import project from './modules/project'
 
 interface State {
     projectList: Project[]
 }
 
 export const store = createStore({
+    modules:{
+        project
+    },
     state(): State {
         return {
             projectList: ProjectStore.getProjectList()
@@ -16,17 +20,16 @@ export const store = createStore({
     },
     mutations: {
         update(state: State, projectList) {
-            console.log("new project list" + JSON.stringify(projectList))
             state.projectList = projectList
         }
     },
     actions: {
-        async onfocus({commit, state}) {
+        async onfocus({ commit, state }) {
             const promise = [] as Promise<Project>[]
 
             for (const project of state.projectList) {
                 promise.push(currentBranch(project.path)
-                    .then(branch => ({...project, branch})))
+                    .then(branch => ({ ...project, branch })))
             }
 
             await recordAsync(async () => {

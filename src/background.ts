@@ -1,4 +1,4 @@
-import { app, BrowserWindow, protocol } from 'electron'
+import { app, BrowserWindow, Menu, protocol } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import Store from "electron-store";
@@ -13,6 +13,8 @@ Store.initRenderer()
 protocol.registerSchemesAsPrivileged([
     { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
+
+let forceQuit = false
 
 async function createWindow() {
     const mainWindowState = windowStateKeeper({
@@ -49,7 +51,27 @@ async function createWindow() {
     win.webContents.once('dom-ready', () => {
         mainWindowState.manage(win);
     })
+
+    win.on('close', e => {
+        if (!forceQuit) {
+            e.preventDefault();
+            if (win.isFullScreen()) {
+                win.once('leave-full-screen', () => win.hide());
+                win.setFullScreen(false);
+            }
+
+            if (process.platform == 'darwin') {
+                Menu.sendActionToFirstResponder('hide:');
+            } else {
+                win.hide();
+            }
+        }
+    });
 }
+
+app.on('before-quit', () => {
+    forceQuit = true;
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {

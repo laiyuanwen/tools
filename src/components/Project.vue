@@ -17,12 +17,10 @@
 
 <script>
 import dayjs from "dayjs";
-import {ipcRenderer} from "electron";
-import {Channel} from "../Constant";
 import IDESelect from "./IDESelect";
-import {currentBranch} from "@/background/utils/git";
-import {ProjectStore} from "@/background/utils/cache/ProjectStore";
-import {openProject} from "@/background/utils";
+import {currentBranch} from "@/utils/git";
+import {ProjectStore} from "@/utils/cache/ProjectStore";
+import {openProject} from "@/utils";
 
 export default {
   name: "Project",

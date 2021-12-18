@@ -11,6 +11,7 @@ export default {
     ProjectListPage
   },
   mounted() {
+    this.$store.dispatch('project/syncCodeDir')
     window.onfocus = () => this.$store.dispatch('onfocus')
   }
 }

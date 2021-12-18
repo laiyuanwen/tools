@@ -6,7 +6,7 @@
 
 <script>
 import Project from "./Project";
-import {ProjectStore} from "@/background/utils/cache/ProjectStore";
+import {ProjectStore} from "@/utils/cache/ProjectStore";
 
 export default {
   name: "HelloWorld",

@@ -1,6 +1,5 @@
 import { exec } from 'child_process'
-import { remote } from 'electron'
-import { PATH } from "@/background/utils/env";
+import { PATH } from "@/utils/env";
 
 export function openProject(type, path) {
     if (type === "AndroidStudio") {

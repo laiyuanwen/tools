@@ -23,7 +23,7 @@ import {defineComponent, ref} from 'vue'
 import IDESelect from "../components/IDESelect";
 import {Channel, OpenType, Tools} from "../Constant";
 import {ipcRenderer} from "electron";
-import {ProjectStore} from "@/background/utils/cache/ProjectStore";
+import {ProjectStore} from "@/utils/cache/ProjectStore";
 
 export default defineComponent({
   components: {IDESelect},
