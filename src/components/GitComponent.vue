@@ -28,12 +28,12 @@ export default {
     repo: Repo
   },
   computed: {
-    isCloning(){
+    isCloning() {
       return this.$store.getters['repo/isCloning'](this.repo.ssh)
     },
     status() {
-      if (this.repo.inWorkspace) return "已存在"
-      else if (this.isCloning) return "Cloning"
+      if (this.isCloning) return "Cloning"
+      else if (this.repo.inWorkspace) return "已存在"
       else return "不存在"
     }
   },

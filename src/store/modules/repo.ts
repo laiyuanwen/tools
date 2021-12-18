@@ -28,7 +28,7 @@ const getters = {
 
 const actions = {
     async syncRepoList({ commit }) {
-        const repos = RepoStore.getRepoList()
+        const repos = RepoStore.getRepos()
         const workspace = fs.readdirSync(WORKSPACE)
 
         console.log(workspace)
@@ -48,6 +48,10 @@ const actions = {
         await clone(ssh)
         commit("cloneFinish", ssh)
     },
+    async addRepo({ commit, dispatch }, repo: Repo) {
+        RepoStore.addRepo(repo)
+        dispatch('syncRepoList')
+    }
 }
 
 const mutations = {

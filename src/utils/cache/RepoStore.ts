@@ -22,11 +22,16 @@ export const RepoStore = {
         })
     },
 
+    addRepo(repo: Repo) {
+        const repos = this.getRepos()
+        repos.unshift(repo)
+        store.set(StoreKey.REPO_LIST, repos)
+    },
+
     /**
      * 获取项目列表
      */
-    getRepoList(): Repo[] {
-        const newVar = store.get(StoreKey.REPO_LIST, []);
-        return newVar as Repo[]
+    getRepos(): Repo[] {
+        return (store.get(StoreKey.REPO_LIST, [])) as Repo[]
     }
 }

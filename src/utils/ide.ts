@@ -15,30 +15,24 @@ export function openProject(type, path) {
     }
 }
 
-const options = { env: { PATH: PATH } }
-const callback = (error, stdout, stderr) => {
-    console.log(options)
-    // console.log(error)
-    // console.log(stdout)
-    // console.log(stderr)
-}
+const options = { env: { PATH: `/usr/local/bin:${ PATH }` } }
 
 function openInAndroidStudio(path) {
-    exec(`studio ${ path }`, options, callback);
+    exec(`studio ${ path }`, options);
 }
 
 function openInIntelliJIDEA(path) {
-    exec(`idea ${ path }`, options, callback);
+    exec(`idea ${ path }`, options);
 }
 
 function openInVSCode(path) {
-    exec(`code ${ path }`, options, callback);
+    exec(`code ${ path }`, options);
 }
 
 function openInFinder(path) {
-    exec(`open ${ path }`, options, callback);
+    exec(`open ${ path }`, options);
 }
 
 function openInTerminal(path) {
-    exec(`open -a iTerm ${ path }`, options, callback);
+    exec(`open -a iTerm ${ path }`, options);
 }
