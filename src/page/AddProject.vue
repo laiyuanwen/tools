@@ -24,6 +24,7 @@ import IDESelect from "../components/IDESelect";
 import {Channel, OpenType, Tools} from "../Constant";
 import {ipcRenderer} from "electron";
 import {ProjectStore} from "@/utils/cache/ProjectStore";
+import {ElMessage} from "element-plus";
 
 export default defineComponent({
   components: {IDESelect},
@@ -34,7 +35,7 @@ export default defineComponent({
       name: ref(''),
       desc: ref(''),
       path: ref(''),
-      openType: ref(OpenType.VSCode) ,
+      openType: ref(OpenType.VSCode),
     }
   },
   methods: {
@@ -42,23 +43,18 @@ export default defineComponent({
       this.openType = type
     },
     addProject() {
-      this.outerVisible = !this.outerVisible
-      // console.log(`path:${this.name}`)
-      // console.log(`path:${this.desc}`)
-      // console.log(`path:${this.path}`)
-      // console.log(`path:${this.openType}`)
-      ProjectStore.addProject({
+      const result = ProjectStore.addProject({
         name: this.name,
         desc: this.desc,
         path: this.path,
         openType: this.openType
       })
-      // ipcRenderer.send(Channel.ADD_PROJECT, {
-      //   name: this.name,
-      //   desc: this.desc,
-      //   path: this.path,
-      //   openType: this.openType
-      // })
+      if (result) {
+        this.outerVisible = !this.outerVisible
+        ElMessage.success('添加成功')
+      } else {
+        ElMessage.error('添加失败，路径已添加')
+      }
     }
   }
 })

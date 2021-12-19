@@ -1,4 +1,6 @@
 <template>
+  <div style="-webkit-app-region: drag;height: 28px;">
+  </div>
   <ProjectListPage msg="Welcome to Your Vue.js App Electron"/>
 </template>
 
@@ -18,6 +20,10 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0
+}
+
 .el-drawer__body {
   --el-drawer-padding-primary: 0
 }

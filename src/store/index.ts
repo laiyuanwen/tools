@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
 import { Project } from "@/Constant";
 import { currentBranch } from "@/utils/git";
-import { recordAsync } from "@/utils";
 import { ProjectStore } from "@/utils/cache/ProjectStore";
 import project from './modules/project'
 import repo from './modules/repo'
@@ -34,10 +33,8 @@ export const store = createStore({
                     .then(branch => ({ ...project, branch })))
             }
 
-            await recordAsync('update project', async () => {
-                const list = await Promise.all(promise)
-                commit('update', list)
-            })
+            const list = await Promise.all(promise)
+            commit('update', list)
         }
     }
 })

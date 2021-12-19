@@ -43,9 +43,6 @@ export default {
   methods: {
     async clone() {
       this.$store.dispatch(`repo/clone`, this.repo.ssh)
-      // this.cloning = true
-      // await clone(this.git.ssh)
-      // this.cloning = false
     },
     click() {
       // this.cloning = false
@@ -76,11 +73,11 @@ export default {
 }
 
 .name {
-  color: #303133;
+  color: var(--el-text-color-primary);
 }
 
 .git-address {
-  color: #909399;
+  color: var(--el-color-info);
   font-size: 12px;
 }
 </style>

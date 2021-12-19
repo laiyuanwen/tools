@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Project from "./Project";
+import Project from "./ProjectComponent";
 import {ProjectStore} from "@/utils/cache/ProjectStore";
 
 export default {

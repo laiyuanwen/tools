@@ -65,6 +65,7 @@ export default {
         home: this.home,
         type: this.type
       })
+      this.$refs.dialog.close()
     }
   }
 }

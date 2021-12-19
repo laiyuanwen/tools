@@ -5,7 +5,7 @@
   <el-drawer
       @open="onOpenDrawer"
       v-model="drawer"
-      size="40%"
+      size="400px"
       title="Git列表">
     <div class="drawer-container">
       <el-space direction="vertical" alignment="stretch" class="git-list">

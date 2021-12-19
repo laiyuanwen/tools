@@ -4,14 +4,20 @@
     <img :src="this.icon" width="32" height="32" :style="{marginRight:'10px'}"/>
 
     <div :style="{display:'flex',flexDirection:'column',flexGrow:1,alignItems:'flex-start'}">
-      <el-tag effect="dark" type="danger">{{ this.branch }}</el-tag>
-      <div :style="{ color: 'red', fontSize:  '16px' }">{{ project.name || "项目名称" }}</div>
-      <div>{{ project.path }}</div>
+      <div class="name">
+        {{ project.name || "项目名称" }}
+        <el-tag size="small" effect="dark" type="danger">{{ this.branch }}</el-tag>
+      </div>
+      <div class="path">{{ project.path }}</div>
     </div>
 
-    <IDESelect :onChange="selectIDE" :default-selected="project.openType"/>
-
-    <el-button type="danger" @click.stop="deleteProject">删除</el-button>
+    <div class="control">
+      <IDESelect :onChange="selectIDE" :default-selected="project.openType"/>
+      <div>
+        <el-button type="primary" @click.stop="updateProject">修改</el-button>
+        <el-button type="danger" @click.stop="deleteProject">删除</el-button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +58,9 @@ export default {
     });
   },
   methods: {
+    updateProject(){
+      console.log("update project")
+    },
     selectIDE(type) {
       ProjectStore.updateProjectOnOpen(type, this.project.path)
       openProject(type, this.project.path)
@@ -68,14 +77,35 @@ export default {
 </script>
 
 <style scoped>
+.name {
+  color: var(--el-text-color-primary)
+}
+
 .project {
   display: flex;
   padding: 8px;
-  background: #42b983;
-  margin-top: 20px
+  box-shadow: var(--el-box-shadow-base);
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: var(--el-border-radius-base);
+}
+
+.path {
+  color: var(--el-color-info);
+  font-size: 12px;
 }
 
 .project:hover {
-  background: #3ba877
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+}
+
+.project:active {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.25);
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
 }
 </style>

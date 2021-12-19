@@ -31,6 +31,7 @@ const actions = {
         const repos = RepoStore.getRepos()
         const workspace = fs.readdirSync(WORKSPACE)
 
+        console.log("workspace文件夹：")
         console.log(workspace)
 
         const gitUrls = await Promise.all(workspace
