@@ -1,28 +1,54 @@
 <template>
   <div @click="click" class="box">
     <div style="flex-grow: 1">
-      <p class="name"> {{ this.repo.name }}({{ this.repo.type }}) </p>
+      <p class="name">
+        {{ this.repo.name }}({{ this.repo.type }})
+        <a-tag :color="status.color"> {{ status.text }}</a-tag>
+      </p>
       <p class="git-address"> {{ this.repo.ssh }} </p>
     </div>
-    <div>
-      <el-button
-          :style="[{color: repo.inWorkspace ? '#67C23A':'#F56C6C'},this.repo.inWorkspace && {pointerEvents: 'none'}]"
-          :disabled="repo.inWorkspace"
-          :loading="this.isCloning"
-          @click.stop="clone"
-          type="text">
-        {{ status }}
-      </el-button>
+
+    <!-- 更多操作 -->
+    <div style="align-items: center;display: flex">
+      <a-dropdown :trigger="['click']">
+        <a class="ant-dropdown-link" @click.stop>
+          <ellipsis-outlined style="font-size: 18px"/>
+        </a>
+        <template #overlay>
+          <a-menu>
+            <a-menu-item>
+              <a disabled href="javascript:;">
+                <ellipsis-outlined/>
+                Clone
+              </a>
+            </a-menu-item>
+            <a-menu-item>
+              <a disabled href="javascript:;">
+                <ellipsis-outlined/>
+                添加到工作区
+              </a>
+            </a-menu-item>
+            <a-menu-item><a href="javascript:;">
+              <ellipsis-outlined/>
+              查看主页</a></a-menu-item>
+            <a-menu-item><a href="javascript:;">
+              <ellipsis-outlined/>
+              删除</a></a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Repo } from "@/Constant";
-import { clone } from "@/utils";
+import Icon from '@ant-design/icons-vue';
+import { EllipsisOutlined } from '@ant-design/icons-vue';
 
 export default {
   name: "GitComponent",
+  components: { EllipsisOutlined, Icon },
   props: {
     // @ts-ignore
     repo: Repo
@@ -32,9 +58,9 @@ export default {
       return this.$store.getters['repo/isCloning'](this.repo.ssh)
     },
     status() {
-      if (this.isCloning) return "Cloning"
-      else if (this.repo.inWorkspace) return "已存在"
-      else return "不存在"
+      if (this.isCloning) return { text: "Cloning", color: "orange" }
+      else if (this.repo.inWorkspace) return { text: "已存在", color: 'green' }
+      else return { text: "不存在", color: "red" }
     }
   },
   data() {
@@ -45,6 +71,8 @@ export default {
       this.$store.dispatch(`repo/clone`, this.repo.ssh)
     },
     click() {
+      console.log('click git component')
+      // 1. 判断是否为MBox主仓
       // this.cloning = false
     }
   }
@@ -58,6 +86,7 @@ export default {
   border-radius: 4px;
   display: flex;
   flex-direction: row;
+  align-content: center;
 }
 
 .box:hover {
