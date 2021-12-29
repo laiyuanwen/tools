@@ -5,6 +5,8 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import { store } from './store'
 import * as ElIconModules from '@element-plus/icons-vue'
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 
 Object.assign(console, log.functions);
 
@@ -16,5 +18,6 @@ for (const iconName in ElIconModules) {
     }
 }
 app.use(ElementPlus)
+app.use(Antd)
 app.use(store)
 app.mount('#app')

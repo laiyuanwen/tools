@@ -25,5 +25,11 @@ export async function clone(ssh: string, path: string = WORKSPACE): Promise<any>
 }
 
 export async function getGitUrl(path: string) {
-    return git(path).listRemote(['--get-url']).then(url => url.trim())
+    try {
+        const url = await git(path).listRemote(['--get-url'])
+        return url.trim()
+    } catch (e) {
+        console.warn("getGitUrl", path, e)
+        return
+    }
 }

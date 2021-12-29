@@ -2,18 +2,19 @@
   <el-button type="primary" style="margin-left: 16px" @click="drawer = true">
     Git列表
   </el-button>
-  <el-drawer
-      @open="onOpenDrawer"
-      v-model="drawer"
-      size="400px"
+  <a-drawer
+      @after-visible-change="onOpenDrawer"
+      v-model:visible="drawer"
+      :bodyStyle="{padding:0}"
+      width="400"
       title="Git列表">
     <div class="drawer-container">
-      <el-space direction="vertical" alignment="stretch" class="git-list">
-        <GitComponent v-for="(git,index) in repos" :key="git.ssh" :repo="git"/>
-      </el-space>
-      <el-button @click="dialog=true" style="border-radius: 0" :round="false" type="primary">添加</el-button>
+      <a-space direction="vertical" class="git-list">
+        <GitComponent v-for="git in repos" :key="git.ssh" :repo="git"/>
+      </a-space>
+      <a-button @click="dialog=true" type="primary">添加</a-button>
     </div>
-  </el-drawer>
+  </a-drawer>
   <AddRepoDialog v-model="dialog"/>
 </template>
 
@@ -27,8 +28,9 @@ export default defineComponent({
   components: { AddRepoDialog, GitComponent },
   setup() {
     return {
+      size: 400,
       dialog: ref(false),
-      drawer: ref(false)
+      drawer: ref(true)
     }
   },
   mounted() {
@@ -52,11 +54,13 @@ export default defineComponent({
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .git-list {
-  flex-grow: 1;
+  overflow: scroll;
+  margin-top: 8px;
+  margin-bottom: 8px;
   padding-left: 8px;
   padding-right: 8px;
 }
