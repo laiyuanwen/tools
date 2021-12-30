@@ -30,7 +30,7 @@ export default defineComponent({
     return {
       size: 400,
       dialog: ref(false),
-      drawer: ref(true)
+      drawer: ref(false)
     }
   },
   mounted() {

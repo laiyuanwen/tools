@@ -28,7 +28,7 @@
                 添加到工作区
               </a>
             </a-menu-item>
-            <a-menu-item><a href="javascript:;">
+            <a-menu-item><a @click="openGitHome" href="javascript:;">
               <ellipsis-outlined/>
               查看主页</a></a-menu-item>
             <a-menu-item><a href="javascript:;">
@@ -45,6 +45,7 @@
 import { Repo } from "@/Constant";
 import Icon from '@ant-design/icons-vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
+import { ipcRenderer } from 'electron'
 
 export default {
   name: "GitComponent",
@@ -74,6 +75,9 @@ export default {
       console.log('click git component')
       // 1. 判断是否为MBox主仓
       // this.cloning = false
+    },
+    openGitHome(){
+      ipcRenderer.invoke('open-url', this.repo.home)
     }
   }
 }

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, protocol } from 'electron'
+import { app, BrowserWindow, Menu, protocol, shell, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import Store from "electron-store";
@@ -120,3 +120,7 @@ if (isDevelopment) {
         })
     }
 }
+
+ipcMain.handle('open-url', (event, url) => {
+    shell.openExternal(url);
+});
