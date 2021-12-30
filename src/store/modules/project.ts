@@ -1,8 +1,10 @@
 import { Project } from "@/Constant";
 import { ProjectStore } from "@/utils/cache/ProjectStore";
 import * as fs from "fs";
-import { record } from "@/utils";
-import { HOME } from "@/utils/env";
+import { currentBranch } from "@/utils";
+import { WORKSPACE } from "@/utils/env";
+import { RepoStore } from "@/utils/cache/RepoStore";
+import { message } from "ant-design-vue";
 
 interface State {
     projectList: Project[]
@@ -27,13 +29,27 @@ const getters = {
 
 // actions
 const actions = {
-    // async checkout({ commit, state }, products) {
-    //     console.log()
-    // },
-    //
-    // addProductToCart({ state, commit }, product) {
-    //     console.log()
-    // },
+    async addGitToProject({ state, commit }, git) {
+        const repo = RepoStore.getRepo(git)
+        const repoName = /(?<=\/)[^/]+(?=\.git)/.exec(repo.ssh)[0]
+
+        const workspacePath = `${ WORKSPACE }/${ repoName }`;
+
+        if (!fs.existsSync(workspacePath)) {
+            message.error("路径不存在，先Clone仓库吧")
+            return
+        }
+
+        const branch = await currentBranch(workspacePath)
+        ProjectStore.addProject({
+            name: repo.name,
+            desc: repo.name,
+            branch,
+            path: workspacePath,
+            openType: this.openType
+        })
+
+    },
 
     syncCodeDir({ state, commit }) {
         // record(()=>{

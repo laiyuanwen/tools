@@ -1,6 +1,7 @@
 import Store from "electron-store";
 import { Repo } from "@/Constant";
 import { HOME } from "@/utils/env";
+import _ from "lodash"
 
 const store = new Store({
     name: 'repo',
@@ -13,6 +14,7 @@ export enum StoreKey {
 
 export const RepoStore = {
 
+
     /**
      * 监听项目的变化
      */
@@ -20,6 +22,11 @@ export const RepoStore = {
         store.onDidChange(StoreKey.REPO_LIST, (newValue, oldValue) => {
             callback(newValue, oldValue)
         })
+    },
+
+    getRepo(ssh: string): Repo {
+        const repos = this.getRepos()
+        return _.find(repos, { ssh })
     },
 
     addRepo(repo: Repo) {

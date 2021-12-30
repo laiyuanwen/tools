@@ -17,23 +17,21 @@
         <template #overlay>
           <a-menu>
             <a-menu-item>
-              <a disabled href="javascript:;">
+              <a @click="clone">
                 <ellipsis-outlined/>
                 Clone
               </a>
             </a-menu-item>
             <a-menu-item>
-              <a disabled href="javascript:;">
+              <a @click="addToWorkspace">
                 <ellipsis-outlined/>
                 添加到工作区
               </a>
             </a-menu-item>
-            <a-menu-item><a @click="openGitHome" href="javascript:;">
-              <ellipsis-outlined/>
-              查看主页</a></a-menu-item>
-            <a-menu-item><a href="javascript:;">
-              <ellipsis-outlined/>
-              删除</a></a-menu-item>
+            <a-menu-item>
+              <a href="javascript:;">
+                <ellipsis-outlined/>
+                删除</a></a-menu-item>
           </a-menu>
         </template>
       </a-dropdown>
@@ -69,15 +67,16 @@ export default {
   },
   methods: {
     async clone() {
+      if (this.repo.inWorkspace || this.isCloning) {
+        return
+      }
       this.$store.dispatch(`repo/clone`, this.repo.ssh)
     },
     click() {
-      console.log('click git component')
-      // 1. 判断是否为MBox主仓
-      // this.cloning = false
-    },
-    openGitHome(){
       ipcRenderer.invoke('open-url', this.repo.home)
+    },
+    addToWorkspace() {
+      this.$store.dispatch(`project/addGitToProject`, this.repo.ssh)
     }
   }
 }
@@ -91,6 +90,7 @@ export default {
   display: flex;
   flex-direction: row;
   align-content: center;
+  cursor: pointer;
 }
 
 .box:hover {
