@@ -3,17 +3,19 @@ import { RepoStore } from "@/utils/cache/RepoStore";
 import _ from 'lodash'
 import { clone, getGitUrl } from "@/utils";
 import fs from "fs";
-import { HOME, WORKSPACE } from "@/utils/env";
+import { WORKSPACE } from "@/utils/env";
 
 interface State {
     repos: Repo[]
     cloningRepo: string[]
+    selectTags: string[]
 }
 
 const state = () => {
     return {
         repos: [],
-        cloningRepo: []
+        cloningRepo: [],
+        selectTags: [],
     } as State
 }
 
@@ -24,6 +26,35 @@ const getters = {
     isCloning: (state: State, getters, rootState) => (ssh) => {
         return _.includes(state.cloningRepo, ssh);
     },
+
+    /**
+     * 获取仓库的分类
+     */
+    allTags: (state: State) => {
+        return _.chain(state.repos)
+            .map("tags")
+            .flatten()
+            .compact()
+            .uniq()
+            .value()
+    },
+
+    /**
+     * 获取选中的仓库
+     */
+    selectTagsRepos(state: State) {
+        if (_.isEmpty(state.selectTags)) {
+            return state.repos
+        }
+        return _.filter(state.repos, (repo: Repo) => {
+            if (!repo.tags) return false
+            for (const tag of repo.tags) {
+                if (_.includes(state.selectTags, tag))
+                    return true
+            }
+            return false
+        })
+    }
 }
 
 const actions = {
@@ -65,6 +96,9 @@ const mutations = {
     cloneFinish(state: State, ssh) {
         state.cloningRepo = state.cloningRepo.filter(s => ssh !== s)
         _.find(state.repos, { ssh }).inWorkspace = true
+    },
+    updateSelectTags(state: State, tags) {
+        state.selectTags = tags
     }
 }
 

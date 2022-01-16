@@ -9,6 +9,10 @@
       width="400"
       title="Git列表">
     <div class="drawer-container">
+      <div style="padding: 5px">
+        选择分类
+        <TagSelect/>
+      </div>
       <a-space direction="vertical" class="git-list">
         <GitComponent v-for="git in repos" :key="git.ssh" :repo="git"/>
       </a-space>
@@ -23,14 +27,16 @@ import { defineComponent, ref } from "vue";
 import GitComponent from "../components/GitComponent.vue";
 import { useStore } from 'vuex'
 import AddRepoDialog from "@/components/AddRepoDialog.vue";
+import TagSelect from "@/components/TagSelect.vue";
 
 export default defineComponent({
-  components: { AddRepoDialog, GitComponent },
+  components: { TagSelect, AddRepoDialog, GitComponent },
   setup() {
     return {
       size: 400,
       dialog: ref(false),
-      drawer: ref(false)
+      drawer: ref(false),
+      tag: ref(1)
     }
   },
   mounted() {
@@ -38,7 +44,7 @@ export default defineComponent({
   },
   computed: {
     repos: function () {
-      return this.$store.state.repo.repos
+      return this.$store.getters['repo/selectTagsRepos']
     }
   },
   methods: {
@@ -58,6 +64,7 @@ export default defineComponent({
 }
 
 .git-list {
+  flex-grow: 1;
   overflow: scroll;
   margin-top: 8px;
   margin-bottom: 8px;

@@ -17,6 +17,9 @@
         >
         </el-option>
       </el-select>
+      <a-checkbox :value="isMBoxContainer" @change="onTypeChange">
+        是否为MBox主仓
+      </a-checkbox>
     </el-space>
 
     <template #footer>
@@ -37,6 +40,7 @@ export default {
   },
   data() {
     return {
+      isMBoxContainer: false,
       name: '',
       ssh: '',
       home: '',
@@ -58,12 +62,16 @@ export default {
     }
   },
   methods: {
+    onTypeChange(e) {
+      this.isMBoxContainer = e.target.checked
+    },
     addRepo() {
       this.$store.dispatch('repo/addRepo', {
         name: this.name,
         ssh: this.ssh,
         home: this.home,
-        type: this.type
+        type: this.type,
+        isMBoxContainer: this.isMBoxContainer
       })
       this.$refs.dialog.close()
     }

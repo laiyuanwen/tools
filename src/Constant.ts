@@ -24,6 +24,8 @@ export interface Repo {
     home: string // 仓库地址
     type: string // 仓库类型（公司、Github）
     inWorkspace: boolean // 是否在本地工作区间
+    isMBoxContainer?: boolean // 是否为mbox主仓
+    tags?: string[] // 分类
 }
 
 export interface Project {

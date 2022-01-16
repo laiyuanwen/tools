@@ -29,6 +29,12 @@
               </a>
             </a-menu-item>
             <a-menu-item>
+              <a @click="openHome">
+                <ellipsis-outlined/>
+                打开主页
+              </a>
+            </a-menu-item>
+            <a-menu-item>
               <a href="javascript:;">
                 <ellipsis-outlined/>
                 删除</a></a-menu-item>
@@ -43,7 +49,8 @@
 import { Repo } from "@/Constant";
 import Icon from '@ant-design/icons-vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
-import { ipcRenderer } from 'electron'
+import { ipcRenderer, clipboard } from 'electron'
+import { message } from "ant-design-vue";
 
 export default {
   name: "GitComponent",
@@ -58,8 +65,10 @@ export default {
     },
     status() {
       if (this.isCloning) return { text: "Cloning", color: "orange" }
-      else if (this.repo.inWorkspace) return { text: "已存在", color: 'green' }
-      else return { text: "不存在", color: "red" }
+      else if (this.repo.inWorkspace) {
+        const text = this.repo.isMBoxContainer ? "MBox主仓" : "已存在"
+        return { text, color: 'green' }
+      } else return { text: "不存在", color: "red" }
     }
   },
   data() {
@@ -72,8 +81,12 @@ export default {
       }
       this.$store.dispatch(`repo/clone`, this.repo.ssh)
     },
-    click() {
+    openHome() {
       ipcRenderer.invoke('open-url', this.repo.home)
+    },
+    click() {
+      clipboard.writeText(this.repo.ssh)
+      message.success(`复制成功：${ this.repo.ssh }`)
     },
     addToWorkspace() {
       this.$store.dispatch(`project/addGitToProject`, this.repo.ssh)

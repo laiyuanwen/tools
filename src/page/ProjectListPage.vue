@@ -1,6 +1,23 @@
 <template>
   <div class="hello">
-    <AddProject/>
+
+    <a-tabs default-active-key="1" @change="callback">
+      <a-tab-pane key="1" tab="分类">
+        分类1
+      </a-tab-pane>
+      <a-tab-pane key="2" tab="分类2">
+        分类2
+      </a-tab-pane>
+      <a-tab-pane key="3" tab="分类3">
+        分类3
+      </a-tab-pane>
+
+      <template #rightExtra>
+        <AddProject/>
+      </template>
+
+    </a-tabs>
+
     <GitListDrawer/>
     <open-file/>
   </div>
@@ -16,7 +33,12 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
-  }
+  },
+  methods: {
+    callback(key) {
+      console.log(key);
+    },
+  },
 }
 </script>
 
