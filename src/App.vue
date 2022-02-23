@@ -1,18 +1,15 @@
 <template>
-  <div style="-webkit-app-region: drag;height: 28px;">
-  </div>
-  <ProjectListPage msg="Welcome to Your Vue.js App Electron"/>
+  <HomePage/>
 </template>
 
 <script lang="ts">
-import ProjectListPage from './page/ProjectListPage.vue'
+import HomePage from "@/page/HomePage.vue";
 
 export default {
   name: 'App',
-  components: {
-    ProjectListPage
-  },
+  components: { HomePage },
   mounted() {
+    // TODO 迁移
     this.$store.dispatch('project/syncCodeDir')
     window.onfocus = () => this.$store.dispatch('onfocus')
   }

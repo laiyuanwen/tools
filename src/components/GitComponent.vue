@@ -30,7 +30,7 @@
             </a-menu-item>
             <a-menu-item>
               <a @click="openHome">
-                <ellipsis-outlined/>
+                <home-outlined/>
                 打开主页
               </a>
             </a-menu-item>
@@ -48,13 +48,13 @@
 <script lang="ts">
 import { Repo } from "@/Constant";
 import Icon from '@ant-design/icons-vue';
-import { EllipsisOutlined } from '@ant-design/icons-vue';
+import { EllipsisOutlined, HomeOutlined } from '@ant-design/icons-vue';
 import { ipcRenderer, clipboard } from 'electron'
 import { message } from "ant-design-vue";
 
 export default {
   name: "GitComponent",
-  components: { EllipsisOutlined, Icon },
+  components: { EllipsisOutlined, HomeOutlined, Icon },
   props: {
     // @ts-ignore
     repo: Repo
