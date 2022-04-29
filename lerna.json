@@ -1,0 +1,8 @@
+{
+  "packages": [
+    "packages/utils",
+    "packages/hooks"
+  ],
+  "npmClient": "pnpm",
+  "version": "1.0.0"
+}
