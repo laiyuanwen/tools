@@ -31,6 +31,7 @@ const getters = {
 const actions = {
     async addGitToProject({ state, commit }, git) {
         const repo = RepoStore.getRepo(git)
+        // @ts-ignore
         const repoName = /(?<=\/)[^/]+(?=\.git)/.exec(repo.ssh)[0]
 
         const workspacePath = `${ WORKSPACE }/${ repoName }`;
@@ -46,6 +47,7 @@ const actions = {
             desc: repo.name,
             branch,
             path: workspacePath,
+            // @ts-ignore
             openType: this.openType
         })
 

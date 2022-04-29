@@ -1,12 +1,12 @@
-import Store from "electron-store";
 import { Repo } from "@/Constant";
 import { HOME } from "@/utils/env";
 import _ from "lodash"
 
-const store = new Store({
-    name: 'repo',
-    cwd: `${ HOME }/.tools`
-})
+const store = {} as any
+// new Store({
+//     name: 'repo',
+//     cwd: `${ HOME }/.tools`
+// })
 
 export enum StoreKey {
     REPO_LIST = "REPO_LIST"
@@ -26,7 +26,7 @@ export const RepoStore = {
 
     getRepo(ssh: string): Repo {
         const repos = this.getRepos()
-        return _.find(repos, { ssh })
+        return _.find(repos, { ssh }) as Repo
     },
 
     addRepo(repo: Repo) {

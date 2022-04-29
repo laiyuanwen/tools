@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import NavigationBar from "@/components/NavigationBar.vue";
 
 export default {

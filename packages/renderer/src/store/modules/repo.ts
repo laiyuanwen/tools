@@ -95,6 +95,7 @@ const mutations = {
     },
     cloneFinish(state: State, ssh) {
         state.cloningRepo = state.cloningRepo.filter(s => ssh !== s)
+        // @ts-ignore
         _.find(state.repos, { ssh }).inWorkspace = true
     },
     updateSelectTags(state: State, tags) {

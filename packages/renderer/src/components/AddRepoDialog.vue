@@ -32,7 +32,7 @@
   </el-dialog>
 </template>
 
-<script>
+<script >
 export default {
   name: "AddRepoDialog",
   props: {

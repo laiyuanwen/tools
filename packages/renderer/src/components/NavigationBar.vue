@@ -12,6 +12,7 @@ export default {
   name: "NavigationBar",
   data: function () {
     return {
+      
       navs: [
         {name: "工作台"}, // 干活的地方
         {name: "项目"}, // 管理多个项目的地方

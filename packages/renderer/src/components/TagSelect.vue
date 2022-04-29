@@ -10,7 +10,7 @@
   >
   </a-select>
 </template>
-<script lang="ts">
+<script>
 export default {
   name: "TagSelect",
   computed: {

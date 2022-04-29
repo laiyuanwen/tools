@@ -10,3 +10,4 @@ tmp
 release
 .idea
 .vscode
+*.log

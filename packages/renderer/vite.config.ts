@@ -25,6 +25,9 @@ export default defineConfig({
     ),
   ],
   base: './',
+  optimizeDeps: {
+    entries: ['./src/main.ts']
+  },
   resolve: {
     alias: [
       {
@@ -37,6 +40,9 @@ export default defineConfig({
     outDir: '../../dist/renderer',
     emptyOutDir: true,
     sourcemap: true,
+  },
+  css: {
+    devSourcemap: true,
   },
   server: {
     host: pkg.env.VITE_DEV_SERVER_HOST,

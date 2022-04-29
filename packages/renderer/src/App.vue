@@ -2,7 +2,7 @@
   <HomePage/>
 </template>
 
-<script lang="ts">
+<script>
 import HomePage from "@/page/HomePage.vue";
 
 export default {

@@ -22,7 +22,7 @@
   <AddRepoDialog v-model="dialog"/>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from "vue";
 import GitComponent from "../components/GitComponent.vue";
 import { useStore } from 'vuex'

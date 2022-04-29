@@ -1,12 +1,13 @@
-import Store from "electron-store";
-import { OpenType, Project } from "@/Constant";
+// import Store from "electron-store";
+import { OpenType, Project } from "src/Constant";
 import _ from "lodash";
 import { HOME } from "@/utils/env";
 
-const store = new Store({
-    name: 'project',
-    cwd: `${ HOME }/.tools`
-})
+const store = {} as any
+//  new Store({
+//     name: 'project',
+//     cwd: `${ HOME }/.tools`
+// })
 
 export enum StoreKey {
     PROJECT_LIST = "PROJECT_LIST"
@@ -27,7 +28,8 @@ export const ProjectStore = {
      * 获取项目列表
      */
     getProjectList(): Project[] {
-        return store.get(StoreKey.PROJECT_LIST, []) as Project[]
+        return []
+        // return store.get(StoreKey.PROJECT_LIST, []) as Project[]
     },
 
     /**

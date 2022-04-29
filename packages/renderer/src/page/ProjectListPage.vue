@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import OpenFile from '../components/OpenFile.vue'
 import AddProject from "./AddProject.vue";
 import GitListDrawer from "@/page/GitListDrawer.vue";

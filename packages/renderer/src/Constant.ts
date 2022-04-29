@@ -34,7 +34,7 @@ export interface Project {
     icon?: string // 图标
     branch?: string // 当前分支
     openType: OpenType  // 最后一个打开的类型
-    openTime?: string //  最后一次打开的时间
+    openTime?: number //  最后一次打开的时间
     path: string // 项目路径
 
     // 未来会支持的字段

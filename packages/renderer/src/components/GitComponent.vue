@@ -5,39 +5,41 @@
         {{ this.repo.name }}({{ this.repo.type }})
         <a-tag :color="status.color"> {{ status.text }}</a-tag>
       </p>
-      <p class="git-address"> {{ this.repo.ssh }} </p>
+      <p class="git-address">{{ this.repo.ssh }}</p>
     </div>
 
     <!-- 更多操作 -->
-    <div style="align-items: center;display: flex">
+    <div style="align-items: center; display: flex">
       <a-dropdown :trigger="['click']">
         <a class="ant-dropdown-link" @click.stop>
-          <ellipsis-outlined style="font-size: 18px"/>
+          <ellipsis-outlined style="font-size: 18px" />
         </a>
         <template #overlay>
           <a-menu>
             <a-menu-item>
               <a @click="clone">
-                <ellipsis-outlined/>
+                <ellipsis-outlined />
                 Clone
               </a>
             </a-menu-item>
             <a-menu-item>
               <a @click="addToWorkspace">
-                <ellipsis-outlined/>
+                <ellipsis-outlined />
                 添加到工作区
               </a>
             </a-menu-item>
             <a-menu-item>
               <a @click="openHome">
-                <home-outlined/>
+                <home-outlined />
                 打开主页
               </a>
             </a-menu-item>
             <a-menu-item>
               <a href="javascript:;">
-                <ellipsis-outlined/>
-                删除</a></a-menu-item>
+                <ellipsis-outlined />
+                删除</a
+              ></a-menu-item
+            >
           </a-menu>
         </template>
       </a-dropdown>
@@ -45,54 +47,54 @@
   </div>
 </template>
 
-<script lang="ts">
+<script >
 import { Repo } from "@/Constant";
-import Icon from '@ant-design/icons-vue';
-import { EllipsisOutlined, HomeOutlined } from '@ant-design/icons-vue';
-import { ipcRenderer, clipboard } from 'electron'
+import Icon from "@ant-design/icons-vue";
+import { EllipsisOutlined, HomeOutlined } from "@ant-design/icons-vue";
+import { ipcRenderer, clipboard } from "electron";
 import { message } from "ant-design-vue";
 
 export default {
   name: "GitComponent",
   components: { EllipsisOutlined, HomeOutlined, Icon },
   props: {
-    // @ts-ignore
-    repo: Repo
+    repo: Repo,
   },
   computed: {
     isCloning() {
-      return this.$store.getters['repo/isCloning'](this.repo.ssh)
+      return this.$store.getters["repo/isCloning"](this.repo.ssh);
     },
     status() {
-      if (this.isCloning) return { text: "Cloning", color: "orange" }
+      if (this.isCloning) return { text: "Cloning", color: "orange" };
       else if (this.repo.inWorkspace) {
-        const text = this.repo.isMBoxContainer ? "MBox主仓" : "已存在"
-        return { text, color: 'green' }
-      } else return { text: "不存在", color: "red" }
-    }
+        const text = this.repo.isMBoxContainer ? "MBox主仓" : "已存在";
+        return { text, color: "green" };
+      } else return { text: "不存在", color: "red" };
+    },
   },
   data() {
-    return {}
+    return {};
   },
   methods: {
     async clone() {
       if (this.repo.inWorkspace || this.isCloning) {
-        return
+        return;
       }
-      this.$store.dispatch(`repo/clone`, this.repo.ssh)
+      this.$store.dispatch(`repo/clone`, this.repo.ssh);
     },
     openHome() {
-      ipcRenderer.invoke('open-url', this.repo.home)
+      ipcRenderer.invoke("open-url", this.repo.home);
     },
     click() {
-      clipboard.writeText(this.repo.ssh)
-      message.success(`复制成功：${ this.repo.ssh }`)
+      clipboard.writeText(this.repo.ssh);
+      message.success(`复制成功：${this.repo.ssh}`);
     },
     addToWorkspace() {
-      this.$store.dispatch(`project/addGitToProject`, this.repo.ssh)
-    }
-  }
-}
+      // @ts-ignore
+      this.$store.dispatch(`project/addGitToProject`, this.repo.ssh);
+    },
+  },
+};
 </script>
 
 <style scoped>
