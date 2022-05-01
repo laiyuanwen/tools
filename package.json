@@ -21,9 +21,7 @@
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",
     "lodash": "^4.17.21",
-    "simple-git": "^2.48.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.2"
+    "simple-git": "^2.48.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.20.2",
@@ -44,7 +42,9 @@
     "vite-plugin-resolve": "^2.0.1",
     "vue": "^3.2.31",
     "@vue/runtime-core":"^3.2.31",
-    "vue-tsc": "^0.31.1"
+    "vue-tsc": "^0.31.1",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.2"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",

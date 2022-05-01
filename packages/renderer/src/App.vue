@@ -1,25 +1,37 @@
 <template>
-  <HomePage/>
+  <div class="home-container">
+    <NavigationBar />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import HomePage from "@/page/HomePage.vue";
+import NavigationBar from "./components/NavigationBar.vue";
 
 export default {
-  name: 'App',
-  components: { HomePage },
+  name: "App",
+  components: { NavigationBar },
   mounted() {
+    // 打包后 Electron 在载入的时候不会默认载入到 " / " 这个默认路径下
+    this.$router.push("/")
     console.log("hello");
-    
+
     // TODO 迁移
-    this.$store.dispatch('project/syncCodeDir')
-    window.onfocus = () => this.$store.dispatch('onfocus')
-  }
-}
+    // this.$store.dispatch("project/syncCodeDir");
+    // window.onfocus = () => this.$store.dispatch("onfocus");
+  },
+};
 </script>
 
 <style>
 body {
-  margin: 0
+  margin: 0;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
 }
 </style>
