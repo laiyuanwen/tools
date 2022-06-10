@@ -1,40 +1,16 @@
-import { createStore } from 'vuex'
-import { Project } from "@/Constant";
-import { currentBranch } from "@/utils/git";
-import { ProjectStore } from "@/utils/cache/ProjectStore";
-import project from './modules/project'
-import repo from './modules/repo'
+import { createStore, Store } from 'vuex'
+import { store as ProjectStore } from './modules/project/ProjectStore'
 
-interface State {
-    projectList: Project[]
+export interface RootState {
 }
 
-export const store = createStore({
+export const store: Store<RootState> = createStore({
     modules: {
-        project,
-        repo
+        project: ProjectStore,
     },
-    state(): State {
-        return {
-            projectList: ProjectStore.getProjectList()
-        }
-    },
-    mutations: {
-        update(state: State, projectList) {
-            state.projectList = projectList
-        }
-    },
-    actions: {
-        async onfocus({ commit, state }) {
-            const promise = [] as Promise<Project>[]
-
-            for (const project of state.projectList) {
-                promise.push(currentBranch(project.path)
-                    .then(branch => ({ ...project, branch })))
-            }
-
-            const list = await Promise.all(promise)
-            commit('update', list)
+    actions:{
+        open(){
+            console.log("open")
         }
     }
 })

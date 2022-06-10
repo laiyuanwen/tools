@@ -2,6 +2,9 @@ import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 import windowStateKeeper from "electron-window-state";
+const Store = require('electron-store');
+// 初始化
+Store.initRenderer();
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()

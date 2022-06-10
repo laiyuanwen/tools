@@ -1,18 +1,20 @@
-// import Store from "electron-store";
+const Store = require("electron-store");
 import { OpenType, Project } from "src/Constant";
 import _ from "lodash";
 import { HOME } from "@/utils/env";
 
-const store = {} as any
-//  new Store({
-//     name: 'project',
-//     cwd: `${ HOME }/.tools`
-// })
+const store = new Store({
+    name: 'project',
+    cwd: `${ HOME }/.tools`
+})
 
 export enum StoreKey {
-    PROJECT_LIST = "PROJECT_LIST"
+    PROJECT_LIST = "PROJECT_LISTsss" // 项目列表
 }
 
+/**
+ * @deprecated
+ */
 export const ProjectStore = {
 
     /**
@@ -28,8 +30,7 @@ export const ProjectStore = {
      * 获取项目列表
      */
     getProjectList(): Project[] {
-        return []
-        // return store.get(StoreKey.PROJECT_LIST, []) as Project[]
+        return store.get(StoreKey.PROJECT_LIST, []) as Project[]
     },
 
     /**
@@ -47,10 +48,10 @@ export const ProjectStore = {
             return false
         }
 
-        projects.push({
-            ...project,
-            openTime: new Date().getTime(),
-        })
+        // projects.push({
+        //     ...project,
+        //     openTime: new Date().getTime(),
+        // })
 
         setProject(projects)
         return true
@@ -77,8 +78,8 @@ export const ProjectStore = {
             return false
         }
 
-        currentProject.openTime = new Date().getTime()
-        currentProject.openType = type
+        // currentProject.openTime = new Date().getTime()
+        // currentProject.openType = type
 
         setProject(projects)
         return true

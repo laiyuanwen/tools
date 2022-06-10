@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import NavigationBar from "./components/NavigationBar.vue";
+import NavigationBar from "./components/NavigationBar";
 
 export default {
   name: "App",
   components: { NavigationBar },
   mounted() {
     // 打包后 Electron 在载入的时候不会默认载入到 " / " 这个默认路径下
-    this.$router.push("/")
+    this.$router.push("/project")
     console.log("hello");
 
     // TODO 迁移

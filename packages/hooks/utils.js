@@ -13,7 +13,13 @@ module.exports = {
      * 读取.gitignore的内容 
      */
     readGitIgnore(projectPath) {
-        const content = fs.readFileSync(path.resolve(projectPath, ".gitignore")).toString()
+        let ignorePath = path.resolve(projectPath, ".gitignore");
+
+        if(!fs.existsSync(ignorePath)){
+            return []
+        }
+
+        const content = fs.readFileSync(ignorePath).toString()
 
         return _.chain(content.split("\n"))
             .compact(content)

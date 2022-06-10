@@ -28,7 +28,17 @@ export interface Repo {
     tags?: string[] // 分类
 }
 
+/**
+ * 代码项目
+ */
 export interface Project {
+    git: string // Git地址
+    name: string // 项目名字
+
+    path?: string // 项目地址
+}
+
+export interface ProjectOld {
     name: string // 项目名字
     desc: string // 项目描述
     icon?: string // 图标
