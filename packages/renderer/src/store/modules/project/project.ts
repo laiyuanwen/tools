@@ -42,14 +42,14 @@ const actions = {
         }
 
         const branch = await currentBranch(workspacePath)
-        ProjectStore.addProject({
-            name: repo.name,
-            desc: repo.name,
-            branch,
-            path: workspacePath,
-            // @ts-ignore
-            openType: this.openType
-        })
+        // ProjectStore.addProject({
+        //     name: repo.name,
+        //     // desc: repo.name,
+        //     branch,
+        //     path: workspacePath,
+        //     // @ts-ignore
+        //     openType: this.openType
+        // })
 
     },
 
