@@ -29,5 +29,18 @@ export function inputText(device: string, text: string) {
     }
 }
 
+/**
+ * 获取顶层Activity类名
+ */
+export function getTopActivity(){
+
+}
+
+/**
+ * 获取Activity栈
+ */
+export function getActivityStack():string{
+    return ""
+}
 
 
