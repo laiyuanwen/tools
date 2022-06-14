@@ -3,6 +3,8 @@
  */
 {
   "appId": "YourAppID",
+  "productName": "工具箱",
+  icon: "./packages/renderer/src/assets/logo.icns",
   "asar": true,
   "directories": {
     "output": "release/${version}"

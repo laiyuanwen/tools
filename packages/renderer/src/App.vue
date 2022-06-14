@@ -1,7 +1,10 @@
 <template>
   <div class="home-container">
-    <NavigationBar />
-    <router-view />
+    <NavigationBar/>
+    <div style="width:100%">
+      <div style="  -webkit-app-region: drag;background: #8cc8ff; width:100%;height: 28px">标题</div>
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -10,7 +13,7 @@ import NavigationBar from "./components/NavigationBar";
 
 export default {
   name: "App",
-  components: { NavigationBar },
+  components: {NavigationBar},
   mounted() {
     // 打包后 Electron 在载入的时候不会默认载入到 " / " 这个默认路径下
     this.$router.push("/project")
