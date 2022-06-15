@@ -20,7 +20,7 @@
     "dayjs": "^1.10.7",
     "electron-store": "^8.0.2",
     "lodash": "^4.17.21",
-    "simple-git": "^2.48.0"
+    "simple-git": "^3.7.1"
   },
   "devDependencies": {
     "@ant-design/icons-vue": "^6.0.1",
