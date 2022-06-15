@@ -16,7 +16,7 @@ export default {
   components: {NavigationBar},
   mounted() {
     // 打包后 Electron 在载入的时候不会默认载入到 " / " 这个默认路径下
-    this.$router.push("/project")
+    this.$router.push("/tools")
     console.log("hello");
 
     // TODO 迁移

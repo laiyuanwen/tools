@@ -18,6 +18,13 @@ export const Tools = {
     Terminal: "Terminal"
 }
 
+export interface AdbRecentInputText {
+    text: string
+    time: number
+
+    desc?: string
+}
+
 export interface Repo {
     name: string // 仓库名称
     ssh: string // git地址
