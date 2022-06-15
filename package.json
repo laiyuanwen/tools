@@ -16,7 +16,7 @@
     "node": ">=14.17.0"
   },
   "dependencies": {
-    "axios": "^0.24.0",
+    "axios": "^0.27.2",
     "dayjs": "^1.10.7",
     "electron-store": "^8.0.2",
     "lodash": "^4.17.21",
