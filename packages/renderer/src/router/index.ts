@@ -2,14 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WorkspacePage from '@/page/workspace/WorkspacePage.vue'
 import ProjectListPageOld from "@/page/workspace/ProjectListPage.vue";
 import ProjectListPage from "@/page/ProjectList/ProjectListPage";
-import ToolsPage from "@/page/tools/ToolsPage.vue";
+import ToolsPage from "@/page/tools/ToolsPage";
 
 const routes = [
     { path: '/', component: ToolsPage },
     { path: '/workspace', component: WorkspacePage },
     { path: '/project', component: ProjectListPage },
     { path: '/repo', component: ProjectListPageOld },
-    { path: '/tools', component: ProjectListPageOld },
+    { path: '/tools', component: ToolsPage },
     { path: '/settings', component: ProjectListPageOld },
 ]
 

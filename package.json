@@ -65,6 +65,7 @@
   ],
   "workspaces": [
     "packages/utils",
-    "packages/hooks"
+    "packages/hooks",
+    "packages/store"
   ]
 }
